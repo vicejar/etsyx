@@ -1,6 +1,13 @@
 @import "bootstrap";
 @import "bootstrap/theme";
 
+.jumbotron {
+  background-image: url('https://dl.dropboxusercontent.com/s/n8w9l6s88551dfq/jumbotron.jpg');
+  h1, h2 {
+    font-family: guardian-egyptt, georgia, serif;
+  }
+}
+
 body {
   background-color: #F5F5F1;
   color: #333333;
