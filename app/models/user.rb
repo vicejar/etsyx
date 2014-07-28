@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   
-  #validates :username, presence: true
+  validates :username, presence: true
   #validates :lastname, presence: true
 
 	has_many :listings, dependent: :destroy
