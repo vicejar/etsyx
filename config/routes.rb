@@ -1,11 +1,21 @@
 Etsyx::Application.routes.draw do
-  devise_for :users
-  resources :listings
+  resources :orders
+
+ devise_for :users
+  resources :listings do
+    resources :orders, only: [:new, :create]
+  end
+
+    resources :listings
 
   get "pages/about"
   get "pages/contact"
   get 'seller' => "listings#seller"
-    root 'listings#index'
+  get 'sales' => "orders#sales"
+  get 'purchases' => "orders#purchases"
+
+  root 'listings#index'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
