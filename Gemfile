@@ -32,6 +32,7 @@ gem "figaro"
 gem 'devise'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'

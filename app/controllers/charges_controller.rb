@@ -1,14 +1,15 @@
 class ChargesController < ApplicationController
-	
+  before_action :authenticate_user!
+
 	def new
 	end
 
 	def create
 	  # Amount in cents
-	  @amount = 500
+	  @amount = 2500
 
 	  customer = Stripe::Customer.create(
-	    :email => 'example@stripe.com',
+	    :email => 'jackson@thevicejar.com',
 	    :card  => params[:stripeToken]
 	  )
 
@@ -18,6 +19,9 @@ class ChargesController < ApplicationController
 	    :description => 'Rails Stripe customer',
 	    :currency    => 'usd'
 	  )
+
+    #current_user.update_attribute(:extra_access, true)
+    #redirect_to videos_path
 
 	rescue Stripe::CardError => e
 	  flash[:error] = e.message

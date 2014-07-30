@@ -12,9 +12,25 @@
     <br>
       <div class="center">
       <%= link_to "Buy It Now", new_listing_order_path(@listing), class: "btn btn-primary", data: { no_turbolink: true } %>
+
+      <%= form_tag charges_path do %>
+          <article>
+            <label class="amount">
+              <span>Price: $5.00</span>
+            </label>
+          </article>
+
+          <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                  data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                  data-description="A month's subscription"
+                  data-amount="500">
+          </script>
+      <% end %>
     </div>
     
   </div>
+
+
 
 <% if current_user == @listing.user %>
   <%= link_to 'Edit', edit_listing_path(@listing), class: "btn btn-link" %> |

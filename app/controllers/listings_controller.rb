@@ -11,6 +11,7 @@ class ListingsController < ApplicationController
   # GET /listings.json
   def index
     @listings = Listing.all
+
   end
 
   # GET /listings/1
@@ -27,11 +28,28 @@ class ListingsController < ApplicationController
   def edit
   end
 
+  def fullname
+    [firstname, lastname].join(" ")
+  end
+
   # POST /listings
   # POST /listings.json
   def create
     @listing = Listing.new(listing_params)
     @listing.user_id = current_user.id
+
+    Stripe.api_key = ENV["STRIPE_API_KEY"]
+    token = params[:stripeToken]
+
+    recipient = Stripe::Recipient.create(
+      :name => current_user.fullname,
+      :type => "individual",
+      :bank_account => token
+      )
+
+    current_user.recipient = recipient.id
+    current_user.save
+
     respond_to do |format|
       if @listing.save
         format.html { redirect_to @listing, notice: 'Listing was successfully created.' }
