@@ -46,6 +46,7 @@ class OrdersController < ApplicationController
     rescue Stripe::CardError => e
       flash[:danger] = e.message
     end
+    
 
     respond_to do |format|
       if @order.save
