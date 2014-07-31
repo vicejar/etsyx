@@ -1,5 +1,5 @@
 Etsyx::Application.routes.draw do
-  resources :orders
+  #resources :orders
   resources :charges
 
  devise_for :users

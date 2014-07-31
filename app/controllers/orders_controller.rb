@@ -9,14 +9,6 @@ class OrdersController < ApplicationController
   def purchases
     @orders = Order.all.where(buyer: current_user).order("created_at DESC")
   end
-  
-  # GET /orders
-  # GET /orders.json
-
-
-  # GET /orders/1
-  # GET /orders/1.json
- 
 
   # GET /orders/new
   def new
@@ -35,8 +27,7 @@ class OrdersController < ApplicationController
 
     Stripe.api_key = ENV["STRIPE_API_KEY"]
     token = params[:stripeToken]
-
-    begin
+   begin
       charge = Stripe::Charge.create(
         :amount => (@listing.price * 100).floor,
         :currency => "usd",
@@ -46,6 +37,12 @@ class OrdersController < ApplicationController
     rescue Stripe::CardError => e
       flash[:danger] = e.message
     end
+
+   transfer = Stripe::Transfer.create(
+      :amount => (@listing.price * 95).floor,
+      :currency => "usd",
+      :recipient => @seller.recipient
+      )
     
 
     respond_to do |format|

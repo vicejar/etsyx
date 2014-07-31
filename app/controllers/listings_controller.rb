@@ -28,9 +28,7 @@ class ListingsController < ApplicationController
   def edit
   end
 
-  def fullname
-    [firstname, lastname].join(" ")
-  end
+
 
   # POST /listings
   # POST /listings.json
