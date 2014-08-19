@@ -1,4 +1,6 @@
 Etsyx::Application.routes.draw do
+  resources :invites
+
   #resources :orders
   resources :charges
 

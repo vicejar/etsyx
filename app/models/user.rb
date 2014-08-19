@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
 
 
- def fullname
+  def full_name
     [firstname, lastname].join("  ")
   end
 
